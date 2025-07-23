@@ -57,10 +57,27 @@ export default class Tree {
 
   insert(value){
     let node = this.root
-    let newNode = this.Node(value)
-
     
-
+    while(node){
+      if(value < node.data){
+        if(!node.left){
+          node.left = this.Node(value)
+          return
+        } else {
+          node = node.left
+        }
+      } else if (value > node.data){
+        if(!node.right){
+          node.right = this.Node(value)
+          return
+        } else {
+          node = node.right
+        }
+      } else if (value == node.data){
+        return console.log(`Value ${value} already exists.`)
+      }
+    }
+    
   }
 
 
