@@ -146,8 +146,7 @@ export default class Tree {
           if (replacementNode.right) {
             replacementParent.left = replacementNode.right;
           }
-          //bad solution, rewrite to an if case that properly 
-          // removes childless right child of deleted node
+          //bad solution, write a proper if case to remove childless right child
           if (node.data == node.right.data) {
             node.right = null;
           }
@@ -157,4 +156,26 @@ export default class Tree {
       node = node[direction];
     }
   }
+
+  inOrderForEach(callback){
+    function traverse(node){
+      if(!node){
+        return;
+      }
+      traverse(node.left);
+      callback(node);
+      traverse(node.right);
+    }
+
+    if(typeof callback !== 'function'){
+      throw new Error("Provided callback is not a function!")
+    } else {
+      traverse(this.root)
+    }
+  }
+
+
 }
+
+
+
