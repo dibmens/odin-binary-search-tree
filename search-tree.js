@@ -174,6 +174,40 @@ export default class Tree {
     }
   }
 
+  preOrderForEach(callback){
+    function traverse(node){
+      if(!node){
+        return;
+      }
+      callback(node);
+      traverse(node.left);
+      traverse(node.right);
+    }
+
+    if(typeof callback !== 'function'){
+      throw new Error("Provided callback is not a function!")
+    } else {
+      traverse(this.root)
+    }
+  }
+
+  postOrderForEach(callback){
+    function traverse(node){
+      if(!node){
+        return;
+      }
+      traverse(node.left);
+      traverse(node.right);
+      callback(node);
+    }
+
+    if(typeof callback !== 'function'){
+      throw new Error("Provided callback is not a function!")
+    } else {
+      traverse(this.root)
+    }
+  }
+
 
 }
 

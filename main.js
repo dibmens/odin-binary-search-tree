@@ -27,4 +27,4 @@ let test = new Tree(dataArray);
 // test.delete(9)
 // test.delete(8)
 test.prettyPrint(test.root)
-test.inOrderForEach(x => console.log(x.data))
+test.postOrderForEach(x => console.log(x.data))
