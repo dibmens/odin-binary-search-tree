@@ -157,30 +157,29 @@ export default class Tree {
     }
   }
 
-  levelOrderForEach(callback){
-    let queue = [this.root]
+  levelOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Provided callback is not a function!");
+    } else {
+      let queue = [this.root];
 
-    while(queue.length > 0){
-      let currentNode = queue.shift()
+      while (queue.length > 0) {
+        let currentNode = queue.shift();
 
-      callback(currentNode)
-
-      if(currentNode.left){
-        queue.push(currentNode.left)
+        callback(currentNode);
+        if (currentNode.left) {
+          queue.push(currentNode.left);
+        }
+        if (currentNode.right) {
+          queue.push(currentNode.right);
+        }
       }
-      if(currentNode.right){
-        queue.push(currentNode.right)
-      }
-
-      
-
     }
   }
 
-
-  inOrderForEach(callback){
-    function traverse(node){
-      if(!node){
+  inOrderForEach(callback) {
+    function traverse(node) {
+      if (!node) {
         return;
       }
       traverse(node.left);
@@ -188,16 +187,16 @@ export default class Tree {
       traverse(node.right);
     }
 
-    if(typeof callback !== 'function'){
-      throw new Error("Provided callback is not a function!")
+    if (typeof callback !== "function") {
+      throw new Error("Provided callback is not a function!");
     } else {
-      traverse(this.root)
+      traverse(this.root);
     }
   }
 
-  preOrderForEach(callback){
-    function traverse(node){
-      if(!node){
+  preOrderForEach(callback) {
+    function traverse(node) {
+      if (!node) {
         return;
       }
       callback(node);
@@ -205,16 +204,16 @@ export default class Tree {
       traverse(node.right);
     }
 
-    if(typeof callback !== 'function'){
-      throw new Error("Provided callback is not a function!")
+    if (typeof callback !== "function") {
+      throw new Error("Provided callback is not a function!");
     } else {
-      traverse(this.root)
+      traverse(this.root);
     }
   }
 
-  postOrderForEach(callback){
-    function traverse(node){
-      if(!node){
+  postOrderForEach(callback) {
+    function traverse(node) {
+      if (!node) {
         return;
       }
       traverse(node.left);
@@ -222,17 +221,48 @@ export default class Tree {
       callback(node);
     }
 
-    if(typeof callback !== 'function'){
-      throw new Error("Provided callback is not a function!")
+    if (typeof callback !== "function") {
+      throw new Error("Provided callback is not a function!");
     } else {
-      traverse(this.root)
+      traverse(this.root);
     }
   }
 
+  // height(value){
+  //   let branch = this.find(value)
 
+  //   if(!branch){
+  //     return null
+  //   } else {
+  //     let edges = 0;
+  //     function traverse(node){
+  //       if(!node){
+  //         return
+  //       }
+  //       traverse(node.left)
+  //       traverse(node.right)
+  //     }
+  //     traverse(branch)
+  //     return edges
+  //   }
+  // }
 
+  depth(){
+    
+  }
+
+  isBalanced(){
+
+  }
+
+  rebalance(){
+    let array = [];
+
+    this.inOrderForEach((x)=>{
+      array.push(x.data)
+    })
+
+    this.root = this.buildTree(array)
+  }
 
 }
-
-
-

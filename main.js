@@ -16,8 +16,13 @@ let test = new Tree(dataArray);
 // test.delete(67)
 // test.delete(4)
 // test.delete(6345)
-// test.delete(324)
-// test.delete(3)
+test.insert(66)
+test.insert(13)
+test.insert(2)
+test.insert(666)
+test.insert(777)
+test.insert(888)
+
 
 // test.delete(4)
 // test.delete(5)
@@ -26,5 +31,7 @@ let test = new Tree(dataArray);
 // test.delete(23)
 // test.delete(9)
 // test.delete(8)
+test.rebalance()
 test.prettyPrint(test.root)
-test.levelOrderForEach(x => console.log(x.data))
+// test.levelOrderForEach(x => console.log(x.data))
+
