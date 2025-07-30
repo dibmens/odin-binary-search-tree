@@ -157,6 +157,27 @@ export default class Tree {
     }
   }
 
+  levelOrderForEach(callback){
+    let queue = [this.root]
+
+    while(queue.length > 0){
+      let currentNode = queue.shift()
+
+      callback(currentNode)
+
+      if(currentNode.left){
+        queue.push(currentNode.left)
+      }
+      if(currentNode.right){
+        queue.push(currentNode.right)
+      }
+
+      
+
+    }
+  }
+
+
   inOrderForEach(callback){
     function traverse(node){
       if(!node){
@@ -207,6 +228,8 @@ export default class Tree {
       traverse(this.root)
     }
   }
+
+
 
 
 }
