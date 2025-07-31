@@ -175,6 +175,7 @@ export default class Tree {
         }
       }
     }
+    
   }
 
   inOrderForEach(callback) {
@@ -247,12 +248,26 @@ export default class Tree {
   //   }
   // }
 
-  depth(){
+  height(value){
+    let branch = this.find(value)
+    function traverse(node) {
+      if (!node) {
+        return -1;
+      }
+      return 1 + Math.max(traverse(node.left),traverse(node.right))
+    }
+
+    if(!branch){
+      return null
+    } else {
+      return traverse(branch)
+    }
     
   }
 
-  isBalanced(){
 
+  isBalanced(){
+    
   }
 
   rebalance(){
