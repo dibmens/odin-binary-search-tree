@@ -229,25 +229,6 @@ export default class Tree {
     }
   }
 
-  // height(value){
-  //   let branch = this.find(value)
-
-  //   if(!branch){
-  //     return null
-  //   } else {
-  //     let edges = 0;
-  //     function traverse(node){
-  //       if(!node){
-  //         return
-  //       }
-  //       traverse(node.left)
-  //       traverse(node.right)
-  //     }
-  //     traverse(branch)
-  //     return edges
-  //   }
-  // }
-
   height(value){
     let branch = this.find(value)
     function traverse(node) {
@@ -257,17 +238,33 @@ export default class Tree {
       return 1 + Math.max(traverse(node.left),traverse(node.right))
     }
 
-    if(!branch){
-      return null
-    } else {
+    if(branch){
       return traverse(branch)
+    } else {
+      return null
     }
-    
+  }
+
+  depth(value) {
+    let node = this.root;
+    let depth = 0
+    while (node) {
+      if (value > node.data) {
+        node = node.right;
+        depth++
+      } else if (value < node.data) {
+        node = node.left;
+        depth++
+      } else {
+        return depth
+      }
+    }
+    return null
   }
 
 
   isBalanced(){
-    
+
   }
 
   rebalance(){
