@@ -175,7 +175,6 @@ export default class Tree {
         }
       }
     }
-    
   }
 
   inOrderForEach(callback) {
@@ -229,52 +228,70 @@ export default class Tree {
     }
   }
 
-  height(value){
-    let branch = this.find(value)
+  height(value) {
+    let branch = this.find(value);
     function traverse(node) {
       if (!node) {
         return -1;
       }
-      return 1 + Math.max(traverse(node.left),traverse(node.right))
+      return 1 + Math.max(traverse(node.left), traverse(node.right));
     }
 
-    if(branch){
-      return traverse(branch)
+    if (branch) {
+      return traverse(branch);
     } else {
-      return null
+      return null;
     }
   }
 
   depth(value) {
     let node = this.root;
-    let depth = 0
+    let depth = 0;
     while (node) {
       if (value > node.data) {
         node = node.right;
-        depth++
+        depth++;
       } else if (value < node.data) {
         node = node.left;
-        depth++
+        depth++;
       } else {
-        return depth
+        return depth;
       }
     }
-    return null
+    return null;
   }
 
+  isBalanced() {
+    let balance = true;
 
-  isBalanced(){
+    this.levelOrderForEach((node) => {
+      let leftHeight = 0;
+      let rightHeight = 0;
 
+      if (node.left) {
+        leftHeight = this.height(node.left.data)+1;
+      }
+      if (node.right) {
+        rightHeight = this.height(node.right.data)+1;
+      }
+      if (Math.abs(leftHeight - rightHeight) > 1) {
+        if (balance) {
+          balance = false;
+        }
+      }
+    });
+    return balance;
   }
 
-  rebalance(){
-    let array = [];
+  rebalance() {
+    if (!this.isBalanced()) {
+      let dataArray = [];
 
-    this.inOrderForEach((x)=>{
-      array.push(x.data)
-    })
+      this.inOrderForEach((x) => {
+        dataArray.push(x.data);
+      });
 
-    this.root = this.buildTree(array)
+      this.root = this.buildTree(dataArray);
+    }
   }
-
 }
